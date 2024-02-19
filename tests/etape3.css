@@ -1,0 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+#word-container {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+#input-container {
+    margin-top: 20px;
+}
+#message {
+    margin-top: 20px;
+    font-weight: bold;
+}

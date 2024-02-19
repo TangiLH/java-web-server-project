@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Description d'une image DALL-E</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        #description {
+            font-size: 18px;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Description d'une image générée par DALL-E</h1>
+    <img id="image" src="image.png" alt="Image générée par DALL-E">
+    <p id="description">Description de l'image : </p>
+    <p id="image-description">Texte décrivant l'image générée par DALL-E.</p>
+
+    <script>
+        // Vous pouvez remplacer le texte ci-dessous par la description réelle de l'image générée par DALL-E
+        document.getElementById("image-description").textContent = "A Shiba Inu dog wearing a beret and black turtleneck.";
+    </script>
+</body>
+</html>
