@@ -14,7 +14,7 @@ Le projet se déroule en plusieurs étapes :
   - On utilisera le patron de conception proxy pour permettre d'éviter d'afficher les images.
   - On utilisera ImageIO pour manipuler les fichiers images.
 
-- Dans un second temps, il s'agit d'ajouter le support des pages dynamiques, en utilisant le cadriciel [freemarker](freemarker.apache.org).  
+- Dans un second temps, il s'agit d'ajouter le support des pages dynamiques, en utilisant le cadriciel [freemarker](http://freemarker.apache.org).  
   - On supportera la requête HTTP GET pour récupérer les valeurs d'un formulaire.
   - Ces valeurs seront disponibles au niveau des templates
   - On utilisera un cookie d'une durée de 15 minutes pour gérer des sessions utilisateur : les valeurs des formulaires seront disponibles dans la session.
