@@ -28,4 +28,27 @@ public class LecteurFichier{
     public LecteurFichier debutLecture(String nomFichier){
         return new LecteurFichier(nomFichier);
     }
+
+    /**
+     * retourne la prochaine ligne du fichier
+     * @return une chaine contenant la prochaine ligne du fichier
+     */
+    public String ligneSuivante(){
+        String retour;
+        if(lecteur.hasNextLine()){
+            retour=lecteur.nextLine();
+        }
+        else{
+            this.fermerLecteur();
+            retour="";
+        }
+        return retour;
+    }
+
+    /**
+     * ferme le lecteur
+     */
+    public void fermerLecteur(){
+        lecteur.close();
+    }
 }
