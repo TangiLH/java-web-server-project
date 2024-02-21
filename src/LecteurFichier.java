@@ -2,6 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * permet de lire un fichier et de récupérer les lignes une par une
+ */
 public class LecteurFichier{
     private File fichier;
     private Scanner lecteur;
