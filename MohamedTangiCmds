@@ -1,0 +1,5 @@
+Command pour compiler + éxecuter fichier test
+javac -d ../target/classes test.java && java -cp ../target/classes test
+
+Main:
+javac -d ../target/classes Main.java && java -cp ../target/classes Main
