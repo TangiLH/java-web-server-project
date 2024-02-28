@@ -50,21 +50,9 @@ public class ClientHandler implements Runnable {
             //         break;
             //     }
             // }
-            String requestLine = in.readLine();
-            String url ="",method="";
-            if (requestLine != null) {
-                // Split the request line into parts (method, URL, protocol)
-                String[] requestParts = requestLine.split("\\s+");
-                if (requestParts.length >= 2) {
-                     url = requestParts[1];
-                     method = requestParts[0];
-                    
-                System.out.println("Requested Method : "+ method +" Requested URL: " + url);
-                
-                }
-            }
+            RequestLineClient rlc = new RequestLineClient(in.readLine());
             OutputStream clientOutput = clientSocket.getOutputStream();
-            if(!method.equals("GET")){
+            if(!rlc.getMethod().equals("GET")){
                 clientOutput.write("HTTP/1.1 405 NON\r\n".getBytes());
                 clientOutput.write("\r\n".getBytes());
                 clientOutput.write("<b>Methode  non supporté!</b>".getBytes());
@@ -73,16 +61,8 @@ public class ClientHandler implements Runnable {
                 System.err.println("Client connection closed!");
                 clientOutput.close();
             }else{
-                urlAvoir(clientOutput,url);
+                urlAvoir(clientOutput,rlc.getUrl());
             }
-            // OutputStream clientOutput = clientSocket.getOutputStream();
-            // clientOutput.write("HTTP/1.1 200 OK\r\n".getBytes());
-            // clientOutput.write("\r\n".getBytes());
-            // clientOutput.write("<b>Welcome!</b>".getBytes());
-            // clientOutput.write("\r\n\r\n".getBytes());
-            // clientOutput.flush();
-            // System.err.println("Client connection closed!");
-            // clientOutput.close();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
