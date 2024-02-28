@@ -21,9 +21,11 @@ public class ClientHandler implements Runnable {
             String sx="aa";
             clientOutput.write("HTTP/1.1 200 OK\r\n".getBytes());
             clientOutput.write("\r\n".getBytes());
-            while((sx=lf.ligneSuivante())!=""){
-                clientOutput.write(Route.remplacerNonHtml(server.getRoutes(), sx).getBytes());
-            }
+           /*  while((sx=lf.ligneSuivante())!=""){
+                //clientOutput.write(Route.remplacerNonHtml(server.getRoutes(), sx).getBytes());
+                clientOutput.write(sx.getBytes());
+            }*/
+            clientOutput.write(lf.getBytes());
             clientOutput.write("\r\n\r\n".getBytes());
             clientOutput.flush();
             System.err.println("Client connection closed!");

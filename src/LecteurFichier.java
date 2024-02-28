@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 /**
@@ -92,5 +94,14 @@ public class LecteurFichier{
      */
     public void fermerLecteur(){
         lecteur.close();
+    }
+
+    /**
+     * retourne le tableau d'octets représentant le fichier
+     * @return
+     * @throws IOException
+     */
+    public byte[] getBytes()throws IOException{
+        return Files.readAllBytes(fichier.toPath());
     }
 }
