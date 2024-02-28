@@ -13,11 +13,10 @@ public class ClientHandler implements Runnable {
         this.server = server;
     }
 
-    public void urlAvoir(String url) throws IOException{
-        OutputStream clientOutput = clientSocket.getOutputStream();
-        String urlPath=Route.getRoute(server.getRoutes(), url).getRoutePath()!=null?Route.getRoute(server.getRoutes(), url).getRoutePath():null;
-        if(urlPath!=null){
-            LecteurFichier lf=LecteurFichier.debutLecture(urlPath);
+    public void urlAvoir(OutputStream clientOutput,String url) throws IOException{
+        
+        if(Route.contains(server.getRoutes(), url)){
+            LecteurFichier lf=LecteurFichier.debutLecture(Route.getRoute(server.getRoutes(),url).getRoutePath());
             String sx="aa";
             clientOutput.write("HTTP/1.1 200 OK\r\n".getBytes());
             clientOutput.write("\r\n".getBytes());
@@ -31,7 +30,7 @@ public class ClientHandler implements Runnable {
             System.err.println("Client connection closed!");
             clientOutput.close();
         }else{
-            clientOutput.write("HTTP/1.1 200 OK\r\n".getBytes());
+            clientOutput.write("HTTP/1.1 404 NON\r\n".getBytes());
             clientOutput.write("\r\n".getBytes());
             clientOutput.write("<b>Page introuvable!</b>".getBytes());
             clientOutput.write("\r\n\r\n".getBytes());
@@ -52,19 +51,30 @@ public class ClientHandler implements Runnable {
             //     }
             // }
             String requestLine = in.readLine();
-            String url ="";
+            String url ="",method="";
             if (requestLine != null) {
                 // Split the request line into parts (method, URL, protocol)
                 String[] requestParts = requestLine.split("\\s+");
                 if (requestParts.length >= 2) {
                      url = requestParts[1];
-                    String method = requestParts[0];
+                     method = requestParts[0];
                     
                 System.out.println("Requested Method : "+ method +" Requested URL: " + url);
                 
                 }
             }
-            urlAvoir(url);
+            OutputStream clientOutput = clientSocket.getOutputStream();
+            if(!method.equals("GET")){
+                clientOutput.write("HTTP/1.1 405 NON\r\n".getBytes());
+                clientOutput.write("\r\n".getBytes());
+                clientOutput.write("<b>Methode  non supporté!</b>".getBytes());
+                clientOutput.write("\r\n\r\n".getBytes());
+                clientOutput.flush();
+                System.err.println("Client connection closed!");
+                clientOutput.close();
+            }else{
+                urlAvoir(clientOutput,url);
+            }
             // OutputStream clientOutput = clientSocket.getOutputStream();
             // clientOutput.write("HTTP/1.1 200 OK\r\n".getBytes());
             // clientOutput.write("\r\n".getBytes());
