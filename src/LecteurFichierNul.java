@@ -2,11 +2,15 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class LecteurFichierNul implements LecteurFichierInterface{
+    private static LecteurFichierInterface cache;
     private LecteurFichierNul(){
 
     }
     public static LecteurFichierInterface debutLecture(){
-        return new LecteurFichierNul();
+        if(cache==null){
+            cache=new LecteurFichierNul();
+        }
+        return cache;
     }
     public String fichierComplet(){
         return "";
