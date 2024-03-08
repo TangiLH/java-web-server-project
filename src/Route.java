@@ -4,6 +4,8 @@ public class Route {
     private String nomRoute;
     private String routePath;
 
+    private static Route nonRoute;
+
     public Route(String nomRoute, String routePath) {
         this.nomRoute = nomRoute;
         this.routePath = routePath;
@@ -24,7 +26,14 @@ public class Route {
                 return route;
             }
         }
-        return null;
+        return getNonRoute();
+    }
+
+    private  static Route getNonRoute(){
+        if(nonRoute== null){
+            nonRoute = new Route("","");
+        }
+        return nonRoute;
     }
 
     public static String remplacerNonHtml(List<Route> liste,String s){

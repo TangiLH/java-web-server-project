@@ -13,32 +13,31 @@ public class ClientHandler implements Runnable {
         this.server = server;
     }
 
-    public void urlAvoir(OutputStream clientOutput,String url) throws IOException{
+    // public void urlAvoir(OutputStream clientOutput,String url) throws IOException{
         
-        if(Route.contains(server.getRoutes(), url)){
-            LecteurFichier lf=LecteurFichier.debutLecture(Route.getRoute(server.getRoutes(),url).getRoutePath());
-            String sx="aa";
-            clientOutput.write("HTTP/1.1 200 OK\r\n".getBytes());
-            clientOutput.write("\r\n".getBytes());
-           /*  while((sx=lf.ligneSuivante())!=""){
-                //clientOutput.write(Route.remplacerNonHtml(server.getRoutes(), sx).getBytes());
-                clientOutput.write(sx.getBytes());
-            }*/
-            clientOutput.write(lf.getBytes());
-            clientOutput.write("\r\n\r\n".getBytes());
-            clientOutput.flush();
-            System.err.println("Client connection closed!");
-            clientOutput.close();
-        }else{
-            clientOutput.write("HTTP/1.1 404 NON\r\n".getBytes());
-            clientOutput.write("\r\n".getBytes());
-            clientOutput.write("<b>Page introuvable!</b>".getBytes());
-            clientOutput.write("\r\n\r\n".getBytes());
-            clientOutput.flush();
-            System.err.println("Client connection closed!");
-            clientOutput.close();
-        }
-    }
+    //     if(Route.contains(server.getRoutes(), url)){
+    //         LecteurFichier lf=LecteurFichier.debutLecture(Route.getRoute(server.getRoutes(),url).getRoutePath());
+    //         clientOutput.write("HTTP/1.1 200 OK\r\n".getBytes());
+    //         clientOutput.write("\r\n".getBytes());
+    //        /*  while((sx=lf.ligneSuivante())!=""){
+    //             //clientOutput.write(Route.remplacerNonHtml(server.getRoutes(), sx).getBytes());
+    //             clientOutput.write(sx.getBytes());
+    //         }*/
+    //         clientOutput.write(lf.getBytes());
+    //         clientOutput.write("\r\n\r\n".getBytes());
+    //         clientOutput.flush();
+    //         System.err.println("Client connection closed!");
+    //         clientOutput.close();
+    //     }else{
+    //         clientOutput.write("HTTP/1.1 404 NON\r\n".getBytes());
+    //         clientOutput.write("\r\n".getBytes());
+    //         clientOutput.write("<b>Page introuvable!</b>".getBytes());
+    //         clientOutput.write("\r\n\r\n".getBytes());
+    //         clientOutput.flush();
+    //         System.err.println("Client connection closed!");
+    //         clientOutput.close();
+    //     }
+    // }
     @Override
     public void run() {
         try {
@@ -51,18 +50,20 @@ public class ClientHandler implements Runnable {
             //     }
             // }
             RequestLineClient rlc = new RequestLineClient(in.readLine());
+            System.out.println(rlc);
             OutputStream clientOutput = clientSocket.getOutputStream();
-            if(!rlc.getMethod().equals("GET")){
-                clientOutput.write("HTTP/1.1 405 NON\r\n".getBytes());
-                clientOutput.write("\r\n".getBytes());
-                clientOutput.write("<b>Methode  non supporté!</b>".getBytes());
-                clientOutput.write("\r\n\r\n".getBytes());
-                clientOutput.flush();
-                System.err.println("Client connection closed!");
-                clientOutput.close();
-            }else{
-                urlAvoir(clientOutput,rlc.getUrl());
-            }
+            MethodeFabrique.executeM(rlc, server, clientOutput);
+            // if(!rlc.getMethod().equals("GET")){
+            //     clientOutput.write("HTTP/1.1 405 NON\r\n".getBytes());
+            //     clientOutput.write("\r\n".getBytes());
+            //     clientOutput.write("<b>Methode  non supporte!</b>".getBytes());
+            //     clientOutput.write("\r\n\r\n".getBytes());
+            //     clientOutput.flush();
+            //     System.err.println("Client connection closed!");
+            //     clientOutput.close();
+            // }else{
+            //     urlAvoir(clientOutput,rlc.getUrl());
+            // }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

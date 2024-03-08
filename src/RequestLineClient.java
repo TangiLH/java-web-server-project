@@ -8,7 +8,6 @@ public class RequestLineClient {
         String[] requestParts = clientRequest.split("\\s+");
         this.method = requestParts[0];
         this.url = requestParts[1];
-        this.toString();
     }
 
 

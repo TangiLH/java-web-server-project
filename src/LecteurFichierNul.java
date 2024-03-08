@@ -24,8 +24,9 @@ public class LecteurFichierNul implements LecteurFichierInterface{
 
     public void writeToOutPut(OutputStream output){
         try{
-            output.write("HTTP/1.1 404 not found\r\n".getBytes());
+            output.write("HTTP/1.1 200 OK\r\n".getBytes());
             output.write("\r\n".getBytes());
+            output.write("404 not found\r\n".getBytes());
             output.write("\r\n\r\n".getBytes());
         }
         catch(IOException e){
