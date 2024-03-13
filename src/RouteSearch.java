@@ -18,7 +18,7 @@ public abstract class RouteSearch {
                 return route;
             }
         }
-        return RouteNoProxy.instanceOf();
+        return RouteNotFound.instanceOf();
     }
 
    

@@ -34,7 +34,7 @@ public class MonServer {
             if (files != null) {
                 for (File file : files) {
                     if (file.isFile()) {
-                        RouteFabrique.AddRoute(file.getName(), file.getAbsolutePath(), proxy, routes);
+                        RouteFabrique.AddRoute(file.getName(), file.getAbsolutePath(), routes);
                     }
                 }
             }

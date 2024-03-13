@@ -1,13 +1,13 @@
-public class RouteNoProxy implements RouteInterface{
+public class RouteNotFound implements RouteInterface{
 
-    private static RouteNoProxy routeNoProxy;
-    private RouteNoProxy(){
+    private static RouteNotFound routeNoProxy;
+    private RouteNotFound(){
         // Singleton
     }
 
-    public static RouteNoProxy instanceOf(){
+    public static RouteNotFound instanceOf(){
         if(routeNoProxy == null){
-            routeNoProxy = new RouteNoProxy();
+            routeNoProxy = new RouteNotFound();
         }
         return routeNoProxy;
     }
