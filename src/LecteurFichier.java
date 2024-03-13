@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.util.Scanner;
 
 /**
+ * N'EST PLUS UTILISE - REMPLACE PAR LecteurFichierInterface
  * permet de lire un fichier et de récupérer les lignes une par une
  */
 public class LecteurFichier{

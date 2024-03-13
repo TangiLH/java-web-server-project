@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * implementation de Methode pour Get
+ */
 public class MethodeGet implements Methode{
 
     @Override
