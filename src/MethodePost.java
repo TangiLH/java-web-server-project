@@ -1,13 +1,23 @@
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * implementation de Methode pour Post (non supportée, renvoie erreur 405)
+ */
 public class MethodePost implements Methode{
     private static MethodePost postMethode;
 
+    /**
+     * constructeur privé de la MethodePost pour le singleton
+     */
     private MethodePost(){
         // singleton
     }
 
+    /**
+     * gère le singleton pour la classe MethodePost
+     * @return MethodePost le singleton de la classe MethodePost
+     */
     public static MethodePost instanceOf(){
         if(postMethode == null){
             postMethode= new MethodePost();
