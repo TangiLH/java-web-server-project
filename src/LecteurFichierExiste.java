@@ -99,6 +99,10 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
         return Files.readAllBytes(fichier.toPath());
     }
 
+    /**
+     * ecrit sur le flux de sortie
+     * @param OutputStream output le flux de sortie
+     */
     public void writeToOutPut(OutputStream output){
         try{
             output.write("HTTP/1.1 200 OK\r\n".getBytes());

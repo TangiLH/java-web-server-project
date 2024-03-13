@@ -1,6 +1,9 @@
 import java.io.IOException;
 import java.io.OutputStream;
 
+/**
+ * est appelé pour lire un fichier qui n'existe pas
+ */
 public class LecteurFichierNul implements LecteurFichierInterface{
     private static LecteurFichierInterface cache;
     private LecteurFichierNul(){
