@@ -19,7 +19,11 @@ public abstract class MethodeFabrique {
         switch (rlc.getMethod()) {
             case "GET":
                 Methode m = new MethodeGet();
+                if(rlc.getUrl().endsWith(".png")){
+                    
+                }
                 m.execute(server,rlc.getUrl(), clientOutput);
+                
                 break;
         
             default:
