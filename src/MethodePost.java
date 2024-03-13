@@ -1,16 +1,16 @@
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class PostMethode implements Methode{
-    private static PostMethode postMethode;
+public class MethodePost implements Methode{
+    private static MethodePost postMethode;
 
-    private PostMethode(){
+    private MethodePost(){
         // singleton
     }
 
-    public static PostMethode instanceOf(){
+    public static MethodePost instanceOf(){
         if(postMethode == null){
-            postMethode= new PostMethode();
+            postMethode= new MethodePost();
         }
         return postMethode;
     }
