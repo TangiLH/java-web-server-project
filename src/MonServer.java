@@ -9,13 +9,21 @@ import java.util.concurrent.Executors;
 
 
 
-
+/**
+ * NOTRE SERVEUR
+ */
 public class MonServer {
     private final List<RouteInterface> routes;
     private final ServerSocket serverSocket;
     private final Executor threadPool;
     private boolean proxy;
 
+    /**
+     * Constructor pour un serveur
+     * @param port le port de serveur
+     * @param proxy le proxy
+     * @throws IOException
+     */
     public MonServer(int port,boolean proxy) throws IOException {
         routes = new ArrayList<>();
         threadPool = Executors.newFixedThreadPool(100);
@@ -27,6 +35,9 @@ public class MonServer {
         System.err.println(sb.toString());
     }
 
+    /**
+     * fonction pour ajouter tout les chemines existent dans le serveur
+     */
     public void addRoutes() {
     File repertoire = new File("../tests");
         if (repertoire.exists() && repertoire.isDirectory()) {
@@ -72,7 +83,9 @@ public class MonServer {
     }
 
     
-
+    /**
+     * fonction pour executer le serveur
+     */
     public void start() {
         while (true) {
             try {
@@ -87,10 +100,18 @@ public class MonServer {
         }
     }
 
+    /**
+     * Getter pour les chemines du serveur
+     * @return routes
+     */
     public List<RouteInterface> getRoutes() {
         return routes;
     }
-    
+
+    /**
+     * Getter pour verifier le existence de proxy
+     * @return
+     */
     public boolean isProxy() {
         return proxy;
     }

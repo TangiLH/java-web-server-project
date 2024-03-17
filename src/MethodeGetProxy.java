@@ -1,7 +1,9 @@
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
-
+/**
+ * Proxy Design pattern
+ */
 public class MethodeGetProxy implements Methode {
 
     private static MethodeGetProxy methodeGetProxy;
@@ -14,6 +16,10 @@ public class MethodeGetProxy implements Methode {
         // singleton
     }
 
+    /**
+     * gère le singleton pour la classe MethodePost
+     * @return MethodePost le singleton de la classe MethodePost
+     */
     public static Methode instanceOf(){
         if(methodeGetProxy == null){
             methodeGetProxy = new MethodeGetProxy();
@@ -21,6 +27,7 @@ public class MethodeGetProxy implements Methode {
         return methodeGetProxy;
     }
 
+    
     @Override
     public void execute(LecteurFichierInterface lfi,OutputStream clientOutput) throws IOException {
         lfi.writeToOutPut(clientOutput);
@@ -29,6 +36,14 @@ public class MethodeGetProxy implements Methode {
         clientOutput.close();
     }
 
+    /**
+     * recupére la page demandée par le client daprés le cache s'il existe sinon il 
+     * le demandé daprés le service et élemine la demande des images
+     * Proxy Design pattern
+     * @param server le serveur
+     * @param url le chemin de la ressource demandée par le client
+     * @return LecteurFichierInterface
+     */
     @Override
     public LecteurFichierInterface getLFI(MonServer server, String url) {
         if(cache == null ){

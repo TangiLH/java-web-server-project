@@ -26,10 +26,6 @@ public abstract class MethodeFabrique {
                     m= new MethodeGet();
                     m.execute(m.getLFI(server, rlc.getUrl()), clientOutput);
                 }
-                 
-                
-                
-                
                 break;
         
             default:
