@@ -17,14 +17,15 @@ public class Cookie {
     public Cookie(String nom, String value) {
         this.nom = nom;
         this.value = value;
-        expiration=LocalTime.now().getSecond() + 15 * 60;
+        expiration=LocalTime.now().toSecondOfDay() + 15 * 60;
+        System.err.println(this);
     }
 
     /**
      * Verifier si le cookie est encore active ou pas
      */
     public boolean checkActive(){
-        if(expiration<=LocalTime.now().getSecond()){
+        if(expiration<=LocalTime.now().toSecondOfDay()){
             return false;
         }
         return true;
@@ -41,6 +42,14 @@ public class Cookie {
         .append(System.lineSeparator());
 
         return sb.toString();
+    }
+
+    /**
+     * Getter Nom de cookie
+     * @return
+     */
+    public String getNom() {
+        return nom;
     }
 
    

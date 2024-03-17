@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -107,8 +108,10 @@ public class MonServer {
     public void verfiesLesCookies(){
         Iterator<Cookie> it = cookies.iterator();
         while(it.hasNext()){
-            if(!it.next().checkActive()){
-                it.remove();
+            Cookie c = it.next();
+            if(!c.checkActive()){
+                System.err.println("Cookie: "+c.getNom()+" a expiré "+LocalTime.now());
+                it.remove(); 
             }
         }
     }
