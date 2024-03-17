@@ -90,6 +90,10 @@ public class MonServer {
     public List<RouteInterface> getRoutes() {
         return routes;
     }
+    
+    public boolean isProxy() {
+        return proxy;
+    }
 
 
     
