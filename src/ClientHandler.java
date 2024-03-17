@@ -3,11 +3,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
-
+/**
+ * Les Client implements Runnable pour les threads 
+ */
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
     private final MonServer server;
 
+    /**
+     * Constructor 
+     * @param clientSocket
+     * @param server
+     */
     public ClientHandler(Socket clientSocket,MonServer server) {
         this.clientSocket = clientSocket;
         this.server = server;
@@ -38,6 +45,10 @@ public class ClientHandler implements Runnable {
     //         clientOutput.close();
     //     }
     // }
+
+    /**
+     * run qui lire la demande du client et l'envoyer au serveur pour l'executé
+     */
     @Override
     public void run() {
         try {

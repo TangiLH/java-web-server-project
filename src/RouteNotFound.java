@@ -1,3 +1,6 @@
+/**
+ * un route inexistent 
+ */
 public class RouteNotFound implements RouteInterface{
 
     private static RouteNotFound routeNoProxy;
