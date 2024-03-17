@@ -59,7 +59,7 @@ public class MethodeGetProxy implements Methode {
         }else{
             if(url.endsWith(".png")){
                 System.err.println("Acces Denied! - no Image");
-                LecteurFichierInterface lfi = LecteurFichierFabrique.creerLecteur("");
+                LecteurFichierInterface lfi = LecteurFichierFabrique.creerLecteur("rouge.png");
                 return lfi;
             }else{
                 LecteurFichierInterface lfi = methodeGet.getLFI(server, url);
