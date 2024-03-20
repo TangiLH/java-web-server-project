@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.TimeZone;
 
+import freemarker.cache.ClassTemplateLoader;
+import freemarker.cache.FileTemplateLoader;
 import freemarker.core.ParseException;
 import freemarker.template.Configuration;
 import freemarker.template.MalformedTemplateNameException;
@@ -15,7 +17,7 @@ import freemarker.template.TemplateNotFoundException;
  */
 public class FreemarkerConfig {
     private static FreemarkerConfig cache;
-    private static Configuration cfg=new Configuration(Configuration.VERSION_2_3_32);;
+    private static Configuration cfg=new Configuration(Configuration.VERSION_2_3_32);
 
     private FreemarkerConfig(String path){
         try{
@@ -24,19 +26,30 @@ public class FreemarkerConfig {
         catch(IOException e){
             e.printStackTrace();
         }
+
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
         cfg.setWrapUncheckedExceptions(true);
         cfg.setFallbackOnNullLoopVariable(false);
         cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault());
+        try{
+            FileTemplateLoader ctl=new FileTemplateLoader(new File("../tests"));
+            cfg.setTemplateLoader(ctl);
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        
+        
+        //cfg.setClassForTemplateLoading(this.getClass(), path);
     }
 
-    public static FreemarkerConfig instanceOf(String path){
+    public static Configuration instanceOf(String path){
         if(cache==null){
             cache= new FreemarkerConfig(path);
         }
-        return cache;
+        return cache.cfg;
     }
 
     /**
