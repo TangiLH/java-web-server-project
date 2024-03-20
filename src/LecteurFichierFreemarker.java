@@ -8,6 +8,7 @@ import java.io.Writer;
 import javax.xml.crypto.Data;
 
 import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 public class LecteurFichierFreemarker implements LecteurFichierInterface{
     private String nomFich;
@@ -42,10 +43,24 @@ public class LecteurFichierFreemarker implements LecteurFichierInterface{
 
     @Override
     public void writeToOutPut(OutputStream output) {
-        // TODO Auto-generated method stub
-        Template temp=FreemarkerConfig.instanceOf("fich").getTemplate(nomFich);
+        //DataInscription nestedData=new DataInscription();
+        //data.addData("prenom", "Padrig");
+        //data.addData("nom", "An Habask");
+       // data.addData("sport_prefere", "mell-droad");
+       // data.addData("niveau", "debutant");
+        data.addData("user", "Padrig");
         Writer wr=new OutputStreamWriter(output);
-        // temp.process(data.getData(),wr);
+        try{
+            Template temp=FreemarkerConfig.instanceOf(".").getTemplate("test.dlb");
+            temp.process(data.getData(),wr);
+            wr.close();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        catch(TemplateException e){
+            e.printStackTrace();
+        }
     }
     
 }

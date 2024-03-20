@@ -32,6 +32,7 @@ public abstract class LecteurFichierFabrique implements LecteurFichierInterface{
         }
         try{
             if(extension.equals("dlb")){
+                System.out.println("dlb file\n");
                 lfi=LecteurFichierFreemarker.debutLecture(nomFichier,data);
             }
             else{
