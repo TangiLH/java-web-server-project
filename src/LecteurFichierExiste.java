@@ -124,10 +124,14 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
      * @param OutputStream output le flux de sortie
      */   
     @Override
-    public void writeToOutPut(OutputStream output) {
+    public void writeToOutPut(MonServer server,OutputStream output) {
+        
         try {
             output.write("HTTP/1.1 200 OK\r\n".getBytes());
-            output.write(generateCookieBytes("test", "valeur_du_cookie", 900)); // Set your desired cookie value here
+            // if(!server.isProxy()){
+            //     output.write("set-cookie: a=aB5Th;Path=/;Max-Age=900".getBytes());
+            //     server.setProxy(true);
+            // }
             output.write("\r\n".getBytes());
             output.write(getBytes()); // Assuming getBytes() returns the response body
             output.write("\r\n\r\n".getBytes());

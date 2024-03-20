@@ -13,9 +13,9 @@ public class MethodeGet implements Methode{
      * @throws IOExceptio
      */
     @Override
-    public void execute(LecteurFichierInterface lfi,OutputStream clientOutput) throws IOException {
+    public void execute(MonServer server,LecteurFichierInterface lfi,OutputStream clientOutput) throws IOException {
         
-        lfi.writeToOutPut(clientOutput);
+        lfi.writeToOutPut(server,clientOutput);
         clientOutput.flush();
         System.err.println("Client connection closed!");
         clientOutput.close();

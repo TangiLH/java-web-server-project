@@ -128,6 +128,7 @@ public class MonServer {
     public boolean isProxy() {
         return proxy;
     }
+    
 
 
     public boolean verifieCookie(String uuid){
@@ -138,6 +139,12 @@ public class MonServer {
         }
         return false;
     }
+
+    public void setProxy(boolean proxy) {
+        this.proxy = proxy;
+    }
+
+
 
 
     

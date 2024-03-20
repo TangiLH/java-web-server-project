@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 /**
  * Les Client implements Runnable pour les threads 
  */
@@ -53,14 +55,23 @@ public class ClientHandler implements Runnable {
     public void run() {
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            // String s;
-            // while ((s = in.readLine()) != null) {
-            //     System.out.println(s);
-            //     if (s.isEmpty()) {
-            //         break;
-            //     }
-            // }
+            String s;
+            boolean cookie=false;
             RequestLineClient rlc = new RequestLineClient(in.readLine());
+            
+            System.err.println("////////////////////////");
+            while ((s = in.readLine()) != null) {
+                if(s.contains("Cookie:")){
+                    System.err.println(Cookie.findCookie(s));
+                    cookie=true;
+                }
+                if (s.isEmpty()) {
+                    break;
+                }
+            }
+            
+            System.err.println("////////////////////////");
+            
             System.out.println(rlc);
             OutputStream clientOutput = clientSocket.getOutputStream();
             MethodeFabrique.executeM(rlc, server, clientOutput);

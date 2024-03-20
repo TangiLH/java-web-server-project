@@ -42,7 +42,7 @@ public class LecteurFichierFreemarker implements LecteurFichierInterface{
     }
 
     @Override
-    public void writeToOutPut(OutputStream output) {
+    public void writeToOutPut(MonServer server,OutputStream output) {
         //DataInscription nestedData=new DataInscription();
         //data.addData("prenom", "Padrig");
         //data.addData("nom", "An Habask");

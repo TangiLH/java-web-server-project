@@ -25,7 +25,7 @@ public class LecteurFichierNul implements LecteurFichierInterface{
         return new byte[0];
     }
 
-    public void writeToOutPut(OutputStream output){
+    public void writeToOutPut(MonServer server,OutputStream output){
         try{
             output.write("HTTP/1.1 200 OK\r\n".getBytes());
             output.write("\r\n".getBytes());
