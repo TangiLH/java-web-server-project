@@ -1,8 +1,16 @@
 import java.util.List;
-
+/**
+ * Une classe abstract qui fait les recherches des routes
+ */
 public abstract class RouteSearch {
    
 
+    /**
+     * Verifier d'apres la liste des route de serveur si un route existe
+     * @param liste liste des route d'apres l'objet serveur
+     * @param nomRoute nom de route conernée
+     * @return boolean
+     */
     public static boolean  contains(List<RouteInterface> liste,String nomRoute){
         for (RouteInterface route : liste) {
             if(route.getNomRoute().equals(nomRoute)){
@@ -12,6 +20,12 @@ public abstract class RouteSearch {
         return false;
     }
 
+    /**
+     * Routerner le route  d'aprés la liste des routes de serveur sinon un route inexistent
+     * @param liste
+     * @param nomRoute
+     * @return Route
+     */
     public static RouteInterface getRoute(List<RouteInterface> liste,String nomRoute){
         for (RouteInterface route : liste) {
             if(route.getNomRoute().equals(nomRoute)){

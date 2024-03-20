@@ -18,17 +18,19 @@ public abstract class MethodeFabrique {
     public static void executeM(RequestLineClient rlc,MonServer server,OutputStream clientOutput) throws IOException{
         switch (rlc.getMethod()) {
             case "GET":
-                Methode m = new MethodeGet();
-                if(rlc.getUrl().endsWith(".png")){
-                    
+                Methode m;
+                if(server.isProxy()){
+                    m=MethodeGetProxy.instanceOf();
+                    m.execute(m.getLFI(server, rlc.getUrl()), clientOutput);
+                }else{
+                    m= new MethodeGet();
+                    m.execute(m.getLFI(server, rlc.getUrl()), clientOutput);
                 }
-                m.execute(server,rlc.getUrl(), clientOutput);
-                
                 break;
         
             default:
                 Methode mp = MethodePost.instanceOf();
-                mp.execute(server,rlc.getUrl(), clientOutput);
+                mp.execute(mp.getLFI(server, rlc.getUrl()), clientOutput);
                 break;
         }
     }
