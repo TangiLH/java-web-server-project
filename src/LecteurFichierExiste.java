@@ -133,7 +133,7 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
             //     server.setProxy(true);
             // }
             output.write("\r\n".getBytes());
-            output.write(getBytes()); // Assuming getBytes() returns the response body
+            output.write(getBytes()); 
             output.write("\r\n\r\n".getBytes());
         } catch (IOException e) {
             e.printStackTrace();

@@ -3,9 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.StringWriter;
 import java.io.Writer;
 
-import javax.xml.crypto.Data;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -13,9 +13,9 @@ import freemarker.template.TemplateException;
 public class LecteurFichierFreemarker implements LecteurFichierInterface{
     private String nomFich;
     private DataInscription data;
-
+    private File fichier;
     private LecteurFichierFreemarker(String nomFich, DataInscription data)throws FileNotFoundException{
-        File f=new File(nomFich);//permet de s'assurer de l'existence du fichier
+        fichier=new File(nomFich);//permet de s'assurer de l'existence du fichier
         this.nomFich=nomFich;
         this.data=data;
     }
@@ -43,17 +43,21 @@ public class LecteurFichierFreemarker implements LecteurFichierInterface{
 
     @Override
     public void writeToOutPut(MonServer server,OutputStream output) {
-        //DataInscription nestedData=new DataInscription();
-        //data.addData("prenom", "Padrig");
-        //data.addData("nom", "An Habask");
-       // data.addData("sport_prefere", "mell-droad");
-       // data.addData("niveau", "debutant");
-        data.addData("user", "Padrig");
-        Writer wr=new OutputStreamWriter(output);
+        DataInscription nestedData=new DataInscription();
+        nestedData.addData("prenom", "Padrig");
+        nestedData.addData("nom", "An Habask");
+        nestedData.addData("sport_prefere", "mell-droad");
+        nestedData.addData("niveau", "debutant");
+        data.addData("param", nestedData.getData());
+        StringWriter sw=new StringWriter();
         try{
-            Template temp=FreemarkerConfig.instanceOf(".").getTemplate("test.dlb");
-            temp.process(data.getData(),wr);
-            wr.close();
+            Template temp=FreemarkerConfig.instanceOf(fichier.getAbsolutePath()).getTemplate(fichier.getName());
+            temp.process(data.getData(),sw);
+            System.out.println("Test :"+sw.toString());
+            output.write("HTTP/1.1 200 OK\r\n".getBytes());
+            output.write("\r\n".getBytes());
+            output.write(sw.toString().getBytes());
+            output.write("\r\n\r\n".getBytes());
         }
         catch(IOException e){
             e.printStackTrace();
@@ -61,6 +65,7 @@ public class LecteurFichierFreemarker implements LecteurFichierInterface{
         catch(TemplateException e){
             e.printStackTrace();
         }
+        
     }
     
 }

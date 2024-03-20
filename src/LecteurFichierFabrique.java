@@ -21,7 +21,7 @@ public abstract class LecteurFichierFabrique implements LecteurFichierInterface{
         DataInscription data=new DataInscription();
         data.addData("nom", "An Habask");
         data.addData("prenom", "Padrig");
-        data.addData("sport_prefere", "football");
+        data.addData("sport_prefere", "mell-droad");
         data.addData("niveau", "debutant");
 
         LecteurFichierInterface lfi;

@@ -30,8 +30,7 @@ public class MethodeGet implements Methode{
     @Override
     public LecteurFichierInterface getLFI(MonServer server, String url) {
         RouteInterface r=RouteSearch.getRoute(server.getRoutes(), url);
-        LecteurFichierInterface lfi =  LecteurFichierFabrique.creerLecteur(r.getRoutePath());
-        return lfi;
+        return LecteurFichierFabrique.creerLecteur(r.getRoutePath());
     }
     
 }
