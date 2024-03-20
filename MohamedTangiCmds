@@ -3,3 +3,7 @@ javac -d ../target/classes test.java && java -cp ../target/classes test
 
 Main:
 javac -d ../target/classes Main.java && java -cp ../target/classes Main
+
+
+Main: + FreeMarker  to compile from src folder
+javac -d ../target/classes *.java -cp ../lib/freemarker.jar && java -cp ../target/classes Main ../lib/freemarker.jar

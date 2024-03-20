@@ -30,7 +30,7 @@ public abstract class MethodeFabrique {
         
             default:
                 Methode mp = MethodePost.instanceOf();
-                mp.execute(mp.getLFI(server, rlc.getUrl()), clientOutput);
+                mp.execute(LecteurFichierNul.debutLecture(), clientOutput);
                 break;
         }
     }

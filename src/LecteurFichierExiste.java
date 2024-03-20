@@ -3,6 +3,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -99,19 +104,40 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
         return Files.readAllBytes(fichier.toPath());
     }
 
-    /**
+   
+
+    
+
+    public byte[] generateCookieBytes(String cookieName, String cookieValue, int durationSeconds) {
+        Instant expirationTime = Instant.now().plusSeconds(durationSeconds);
+        String cookieExpiration = DateTimeFormatter.RFC_1123_DATE_TIME
+                .withLocale(Locale.FRANCE)  // Using French locale
+                .withZone(ZoneId.of("GMT"))
+                .format(expirationTime);
+        String cookieHeader = String.format("Set-Cookie: %s=%s; Expires=%s; Path=/\r\n",
+                cookieName, cookieValue, cookieExpiration);
+        return cookieHeader.getBytes();
+    }
+
+     /**
      * ecrit sur le flux de sortie
      * @param OutputStream output le flux de sortie
-     */
-    public void writeToOutPut(OutputStream output){
-        try{
+     */   
+    @Override
+    public void writeToOutPut(OutputStream output) {
+        try {
             output.write("HTTP/1.1 200 OK\r\n".getBytes());
+            output.write(generateCookieBytes("test", "valeur_du_cookie", 900)); // Set your desired cookie value here
             output.write("\r\n".getBytes());
-            output.write(getBytes());
+            output.write(getBytes()); // Assuming getBytes() returns the response body
             output.write("\r\n\r\n".getBytes());
-        }
-        catch(IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    
+    
+
+    
 }

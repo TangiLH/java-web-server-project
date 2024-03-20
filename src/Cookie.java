@@ -1,56 +1,47 @@
-import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Classe Cookie d'un durée de 15 minutes
  */
 public class Cookie {
 
-    private String nom;
-    private String value;
-    private int expiration;
+    private UUID uuid;
+    private List<DataInscription> values;
 
     /**
      * Constructor
      * @param nom
      * @param value
      */
-    public Cookie(String nom, String value) {
-        this.nom = nom;
-        this.value = value;
-        expiration=LocalTime.now().toSecondOfDay() + 15 * 60;
-        System.err.println(this);
+    public Cookie(String uuid) {
+        this.uuid =UUID.fromString(uuid);
+        this.values=new ArrayList<>();
+        
     }
 
-    /**
-     * Verifier si le cookie est encore active ou pas
-     */
-    public boolean checkActive(){
-        if(expiration<=LocalTime.now().toSecondOfDay()){
-            return false;
-        }
-        return true;
-    }
-
+    
     /**
      * To string les détails de cookie
      */
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Cookie Name").append(nom)
-        .append(" Value: ").append(value).append(" expiration: ").append(LocalTime.ofSecondOfDay(expiration))
-        .append(System.lineSeparator());
 
-        return sb.toString();
+        return "Cookie: "+uuid.toString();
     }
 
-    /**
-     * Getter Nom de cookie
-     * @return
-     */
-    public String getNom() {
-        return nom;
+    
+
+    public String getUUID(){
+        return uuid.toString();
     }
+
+    public List<DataInscription> getValues() {
+        return values;
+    }
+
+    
 
    
 

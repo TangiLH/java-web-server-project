@@ -45,7 +45,7 @@ public class LecteurFichierFreemarker implements LecteurFichierInterface{
         // TODO Auto-generated method stub
         Template temp=FreemarkerConfig.instanceOf("fich").getTemplate(nomFich);
         Writer wr=new OutputStreamWriter(output);
-        temp.process(data.getData(),wr);
+        // temp.process(data.getData(),wr);
     }
     
 }

@@ -2,9 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -15,11 +13,11 @@ import java.util.concurrent.Executors;
  * NOTRE SERVEUR
  */
 public class MonServer {
-    private List<Cookie> cookies;
     private final List<RouteInterface> routes;
     private final ServerSocket serverSocket;
     private final Executor threadPool;
     private boolean proxy;
+    private List<Cookie> sessions;
 
     /**
      * Constructor pour un serveur
@@ -31,7 +29,7 @@ public class MonServer {
         routes = new ArrayList<>();
         threadPool = Executors.newFixedThreadPool(100);
         serverSocket = new ServerSocket(port);
-        cookies= new ArrayList<>();
+        this.sessions=new ArrayList<>();
         this.proxy =proxy;
         StringBuilder sb = new StringBuilder();
         sb.append("Server is running on port: ").append(port);
@@ -93,7 +91,6 @@ public class MonServer {
     public void start() {
         while (true) {
             try {
-                verfiesLesCookies();
                 Socket clientSocket = serverSocket.accept();
                 System.err.println("Client connected");
                 // Handle each client in a separate thread
@@ -105,16 +102,16 @@ public class MonServer {
         }
     }
 
-    public void verfiesLesCookies(){
-        Iterator<Cookie> it = cookies.iterator();
-        while(it.hasNext()){
-            Cookie c = it.next();
-            if(!c.checkActive()){
-                System.err.println("Cookie: "+c.getNom()+" a expiré "+LocalTime.now());
-                it.remove(); 
-            }
-        }
-    }
+    // public void verfiesLesCookies(){
+    //     Iterator<Cookie> it = cookies.iterator();
+    //     while(it.hasNext()){
+    //         Cookie c = it.next();
+    //         if(!c.checkActive()){
+    //             System.err.println("Cookie: "+c.getNom()+" a expiré "+LocalTime.now()+System.lineSeparator());
+    //             it.remove(); 
+    //         }
+    //     }
+    // }
 
     /**
      * Getter pour les chemines du serveur
@@ -130,6 +127,16 @@ public class MonServer {
      */
     public boolean isProxy() {
         return proxy;
+    }
+
+
+    public boolean verifieCookie(String uuid){
+        for(Cookie c : sessions){
+            if(c.getUUID().equals(uuid)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
