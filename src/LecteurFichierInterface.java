@@ -27,5 +27,5 @@ public interface LecteurFichierInterface {
      * ecrit le fichier sur le flux de sortie passé en paramètre
      * @param output le flux de sortie
      */
-    public void writeToOutPut(MonServer server,OutputStream output);
+    public void writeToOutPut(MonServer server,OutputStream output,RequestLineClient rlc);
 }

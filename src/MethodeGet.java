@@ -13,16 +13,16 @@ public class MethodeGet implements Methode{
      * @throws IOExceptio
      */
     @Override
-    public void execute(MonServer server,LecteurFichierInterface lfi,OutputStream clientOutput) throws IOException {
+    public void execute(MonServer server,LecteurFichierInterface lfi,OutputStream clientOutput,RequestLineClient rlc) throws IOException {
         
-        lfi.writeToOutPut(server,clientOutput);
+        lfi.writeToOutPut(server,clientOutput,rlc);
         clientOutput.flush();
         System.err.println("Client connection closed!");
         clientOutput.close();
     }
 
     /**
-     * recupére la page demandée par le client daprés le serveur
+     * recupére la page demandée par le client d'aprés le serveur
      * @param server le serveur
      * @param url le chemin de la ressource demandée par le client
      * @return LecteurFichierInterface

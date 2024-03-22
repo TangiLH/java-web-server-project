@@ -29,8 +29,8 @@ public class MethodeGetProxy implements Methode {
 
     
     @Override
-    public void execute(MonServer server,LecteurFichierInterface lfi,OutputStream clientOutput) throws IOException {
-        lfi.writeToOutPut(server,clientOutput);
+    public void execute(MonServer server,LecteurFichierInterface lfi,OutputStream clientOutput,RequestLineClient rlc) throws IOException {
+        lfi.writeToOutPut(server,clientOutput,rlc);
         clientOutput.flush();
         System.err.println("Client connection closed!");
         clientOutput.close();

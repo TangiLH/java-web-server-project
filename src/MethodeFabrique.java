@@ -21,16 +21,16 @@ public abstract class MethodeFabrique {
                 Methode m;
                 if(server.isProxy()){
                     m=MethodeGetProxy.instanceOf();
-                    m.execute(server,m.getLFI(server, rlc.getUrl()), clientOutput);
+                    m.execute(server,m.getLFI(server, rlc.getUrl()), clientOutput,rlc);
                 }else{
                     m= new MethodeGet();
-                    m.execute(server,m.getLFI(server, rlc.getUrl()), clientOutput);
+                    m.execute(server,m.getLFI(server, rlc.getUrl()), clientOutput,rlc);
                 }
                 break;
         
             default:
                 Methode mp = MethodePost.instanceOf();
-                mp.execute(server,LecteurFichierNul.debutLecture(), clientOutput);
+                mp.execute(server,LecteurFichierNul.debutLecture(), clientOutput,rlc);
                 break;
         }
     }

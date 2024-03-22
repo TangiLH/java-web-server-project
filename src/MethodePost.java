@@ -32,7 +32,7 @@ public class MethodePost implements Methode{
      * @throws IOExceptio
      */
     @Override
-    public void execute(MonServer server,LecteurFichierInterface lfi, OutputStream clientOutput) throws IOException {
+    public void execute(MonServer server,LecteurFichierInterface lfi, OutputStream clientOutput,RequestLineClient rlc) throws IOException {
         clientOutput.write("HTTP/1.1 405 NON\r\n".getBytes());
         clientOutput.write("\r\n".getBytes());
         clientOutput.write("<b>Methode  non supporte!</b>".getBytes());

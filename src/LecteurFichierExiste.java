@@ -3,11 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.file.Files;
-import java.time.Duration;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**
@@ -104,40 +99,27 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
         return Files.readAllBytes(fichier.toPath());
     }
 
-   
-
     
-
-    public byte[] generateCookieBytes(String cookieName, String cookieValue, int durationSeconds) {
-        Instant expirationTime = Instant.now().plusSeconds(durationSeconds);
-        String cookieExpiration = DateTimeFormatter.RFC_1123_DATE_TIME
-                .withLocale(Locale.FRANCE)  // Using French locale
-                .withZone(ZoneId.of("GMT"))
-                .format(expirationTime);
-        String cookieHeader = String.format("Set-Cookie: %s=%s; Expires=%s; Path=/\r\n",
-                cookieName, cookieValue, cookieExpiration);
-        return cookieHeader.getBytes();
-    }
 
      /**
      * ecrit sur le flux de sortie
      * @param OutputStream output le flux de sortie
      */   
     @Override
-    public void writeToOutPut(MonServer server,OutputStream output) {
+    public void writeToOutPut(MonServer server,OutputStream output,RequestLineClient rlc) {
         
         try {
             output.write("HTTP/1.1 200 OK\r\n".getBytes());
-            // if(!server.isProxy()){
-            //     output.write("set-cookie: a=aB5Th;Path=/;Max-Age=900".getBytes());
-            //     server.setProxy(true);
-            // }
+            if(rlc.getCookie()==""||rlc.getCookie()==null||!server.verifieCookie(rlc.getCookie())){
+                output.write(Cookie.generateCookieBytes(server.generateCookie(rlc)));
+            }
             output.write("\r\n".getBytes());
             output.write(getBytes()); 
             output.write("\r\n\r\n".getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
     }
 
     

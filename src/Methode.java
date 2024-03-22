@@ -12,7 +12,7 @@ public interface Methode {
      * @param clientOutput le flux de sortie
      * @throws IOException
      */
-    public void execute(MonServer server,LecteurFichierInterface lfi, OutputStream clientOutput) throws IOException;
+    public void execute(MonServer server,LecteurFichierInterface lfi, OutputStream clientOutput,RequestLineClient rlc) throws IOException;
 
     /**
      * recupére la page demandée par le client daprés le serveur

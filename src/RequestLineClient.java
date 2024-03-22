@@ -1,6 +1,6 @@
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.util.HashMap;
+import java.time.LocalTime;
 import java.util.Map;
 
 /**
@@ -10,6 +10,7 @@ public class RequestLineClient {
     private String method;
     private String url;
     private String cookieUUID;
+    private Cookie cookie;
     private DataInscription params;
 
 
@@ -49,22 +50,10 @@ public class RequestLineClient {
         }
         
     }
-    
-    /**
-     * Fonction pour verifier si le client a autorise les images ou pas! d'aprés les paramétre 
-     * de la requete de client
-     * @return
-     */
-    public boolean verifieImageProxy(){
-        for (Map.Entry<String, Object> entry : params.getData().entrySet()) {
-            if(entry.getKey().equals("noimage")){
-                return true;
-            }
-        }
-        return false;
-    }
-    
 
+    public String getCookie(){
+        return this.cookieUUID;
+    }
 
     /**
      * Getter Methode
@@ -73,6 +62,7 @@ public class RequestLineClient {
     public String getMethod() {
         return method;
     }
+    
 
 
     /**
@@ -91,12 +81,27 @@ public class RequestLineClient {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Requested Method :").append(method).append(" Requested URL: ").append(url)
-        .append(" Cookie: ").append(cookieUUID!=null?cookieUUID:"not active").append(System.lineSeparator());
+        .append(" Cookie: ").append(cookie!=null?cookie.getUUID().toString()+" Expire Time: "+LocalTime.ofSecondOfDay(cookie.getExpireTime()):" not active")
+        .append(System.lineSeparator());
         return sb.toString();
     }
 
-    public void addCookie(String uuid){
-        cookieUUID=uuid;
+    
+
+    public void addCookiee(Cookie e){
+        cookie=e;
+    }
+
+    public void addCookie(String cookieUUID){
+        this.cookieUUID=cookieUUID;
+    }
+
+    public String getCookieUUID() {
+        return cookieUUID;
+    }
+
+    public DataInscription getParams() {
+        return params;
     }
 
     
