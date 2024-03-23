@@ -43,10 +43,8 @@ public class RequestLineClient {
                 }   
             }
         }
-        if(params != null ){
-            for (Map.Entry<String, Object> entry : params.getData().entrySet()) {
-                System.err.println("Param: "+entry.getKey()+" "+entry.getValue());
-            }
+        for (Map.Entry<String, Object> entry : params.getData().entrySet()) {
+            System.err.println("Param: "+entry.getKey()+" "+entry.getValue());
         }
         
     }
@@ -81,7 +79,7 @@ public class RequestLineClient {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Requested Method :").append(method).append(" Requested URL: ").append(url)
-        .append(" Cookie: ").append(cookie!=null?cookie.getUUID().toString()+" Expire Time: "+LocalTime.ofSecondOfDay(cookie.getExpireTime()):" not active")
+        .append(" Cookie: ").append(cookie!=null?cookie.getUUID()+" Expire Time: "+LocalTime.ofSecondOfDay(cookie.getExpireTime()):" not active")
         .append(System.lineSeparator());
         return sb.toString();
     }

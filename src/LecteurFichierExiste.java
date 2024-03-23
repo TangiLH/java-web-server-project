@@ -45,7 +45,7 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
      * @param fichier le fichier
      * @return un lecteur fichier.
      */
-    public LecteurFichierInterface debutLecture(File fichier)throws FileNotFoundException{
+    public static LecteurFichierInterface debutLecture(File fichier)throws FileNotFoundException{
         return new LecteurFichierExiste(fichier);
     }
 
@@ -71,7 +71,7 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
      */
     public String fichierComplet(){
         try{
-        this.lecteur=new Scanner(this.fichier);;
+        this.lecteur=new Scanner(this.fichier);
         StringBuilder retour = new StringBuilder();
         while(lecteur.hasNextLine()){
             retour.append(lecteur.nextLine());
@@ -110,7 +110,7 @@ public class LecteurFichierExiste implements LecteurFichierInterface{
         
         try {
             output.write("HTTP/1.1 200 OK\r\n".getBytes());
-            if(rlc.getCookie()==""||rlc.getCookie()==null||!server.verifieCookie(rlc.getCookie())){
+            if(rlc.getCookie().equals("")||rlc.getCookie()==null||!server.verifieCookie(rlc.getCookie())){
                 output.write(Cookie.generateCookieBytes(server.generateCookie(rlc)));
             }
             output.write("\r\n".getBytes());

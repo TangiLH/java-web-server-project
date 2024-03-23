@@ -66,7 +66,10 @@ public class Cookie {
                 if(c == ' '){
                     break;
                 }else{
-                    code+=c;
+                    StringBuilder sb=new StringBuilder();
+                    sb.append(code);
+                    sb.append(c);
+                    code=sb.toString();
                 }
             }
             break;
@@ -86,7 +89,7 @@ public class Cookie {
      * @return
      */
     public static byte[] generateCookieBytes(String cookieValue) {
-        String cookieHeader = String.format("Set-Cookie: JSMT=%s; max-age=900; Path=/\r\n",
+        String cookieHeader = String.format("Set-Cookie: JSMT=%s; max-age=900; Path=/\r%n",
                 cookieValue);
         return cookieHeader.getBytes();
     }

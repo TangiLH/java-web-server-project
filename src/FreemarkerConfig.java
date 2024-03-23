@@ -35,16 +35,13 @@ public class FreemarkerConfig {
         catch(IOException e){
             e.printStackTrace();
         }
-        
-        
-        //cfg.setClassForTemplateLoading(this.getClass(), path);
     }
 
     public static Configuration instanceOf(String path){
         if(cache==null){
             cache= new FreemarkerConfig(path);
         }
-        return FreemarkerConfig.cache.cfg;
+        return FreemarkerConfig.cfg;
     }
 
     /**
