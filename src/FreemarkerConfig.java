@@ -44,7 +44,7 @@ public class FreemarkerConfig {
         if(cache==null){
             cache= new FreemarkerConfig(path);
         }
-        return cache.cfg;
+        return FreemarkerConfig.cache.cfg;
     }
 
     /**

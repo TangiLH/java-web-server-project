@@ -43,15 +43,11 @@ public class LecteurFichierFreemarker implements LecteurFichierInterface{
 
     @Override
     public void writeToOutPut(MonServer server,OutputStream output,RequestLineClient rlc) {
-        // DataInscription nestedData=new DataInscription();
-        // nestedData.addData("prenom", "Padrig");
-        // nestedData.addData("nom", "An Habask");
-        // nestedData.addData("sport_prefere", "mell-droad");
-        // nestedData.addData("niveau", "debutant");
         data.addData("param", rlc.getParams().getData());
         StringWriter sw=new StringWriter();
         try{
-            Template temp=FreemarkerConfig.instanceOf(fichier.getAbsolutePath()).getTemplate(fichier.getName());
+            System.out.println(fichier.getAbsolutePath());
+            Template temp=FreemarkerConfig.instanceOf(fichier.getParent()).getTemplate(fichier.getName());
             temp.process(data.getData(),sw);
             System.out.println("Test :"+sw.toString());
             output.write("HTTP/1.1 200 OK\r\n".getBytes());
